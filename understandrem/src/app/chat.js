@@ -7,8 +7,8 @@ export default function Chat({ conversation, addMessage }) {
   let msgs = messages.map(message => <Msg message={message} key={message.number}/>)
 
   return (
-    <>
-      <div className="remChat">
+    <div className="remChat">
+      <div className="remChatMessages">
         {msgs}
       </div>
       <MsgTextBox handleMessage={
@@ -30,7 +30,7 @@ export default function Chat({ conversation, addMessage }) {
           }
         }
       }/>
-    </>
+    </div>
   );
 }
 
