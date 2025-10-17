@@ -2,11 +2,24 @@ import { gen_ltm_prompt, SYSTEM_PROMPT } from "./prompts";
 
 const { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } = require("@langchain/google-genai");
 
-const llm = new ChatGoogleGenerativeAI({
+let llm = new ChatGoogleGenerativeAI({
     model: "gemini-2.0-flash",
     temperature: 0,
-    apiKey: "..."
+    apiKey: "."
 })
+
+let haveKey = false;
+export function keyProvided() {
+    return haveKey;
+}
+export function setKey(key) {
+    llm = new ChatGoogleGenerativeAI({
+        model: "gemini-2.0-flash",
+        temperature: 0,
+        apiKey: key
+    })
+    haveKey = true;
+}
 
 export async function prompt(messages, retrieved = null) {
     const labelled_messages = messages.map(message => {return {role: message.label, content: message.text}});

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Chat, { Conversation, ConversationConfig } from "./chat";
+import URHeader from "./header";
 
 export default function Home() {
   const [newConvConfig, setNewConvConfig] = useState(new ConversationConfig(5, 5));
@@ -9,7 +10,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>Understand REM</h1>
+      <URHeader/>
       {/* horizontal blocks */}
       <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}> 
         <div>
