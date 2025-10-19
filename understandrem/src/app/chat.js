@@ -2,9 +2,16 @@ import { useState } from "react";
 import { prompt, query } from "./ai";
 
 export default function Chat({ conversation, addMessage }) {
+  if (conversation == null) {
+    return <div className="remChat">
+      <h1>Create a new chat!</h1>
+    </div>
+  }
+
   const messages = conversation.messages;
   const { stmLength, maxRetrievals } = conversation.config;
   let msgs = messages.map(message => <Msg message={message} key={message.number}/>)
+
 
   return (
     <div className="remChat">
@@ -53,7 +60,8 @@ export class Message {
 }
 
 export class Conversation {
-  constructor(config) {
+  constructor(config, id) {
+    this.id = id
     this.config = config
     this.messages = []
   }
