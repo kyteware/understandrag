@@ -13,13 +13,12 @@ export default function Home() {
     return convList.find((conv) => conv.id == currentConvId);
   }
 
-  function updateCurrentConv(updatedConv) {
-    setConvList(convList.map((conv) => conv.id == currentConvId? updatedConv : conv));
-  }
-
   function addMessageToCurrentConv(msg) {
-    let currentConv = getCurrentConv();
-    updateCurrentConv({ ...currentConv, messages: [...currentConv.messages, msg] });
+    setConvList(prev => {
+      const currentConv = prev.find((conv) => conv.id == currentConvId);
+      const updatedConv = { ...currentConv, messages: [...currentConv.messages, msg] };
+      return prev.map((conv) => conv.id == currentConvId? updatedConv : conv);
+    })
   }
 
   return (
