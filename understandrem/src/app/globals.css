@@ -58,6 +58,19 @@ body {
 
 .userMsg, .assistantMsg {
   border-radius: 7px;
-  border-width: 5px;
+  border-width: 2px;
   margin: 2px;
+  padding: 3px;
+}
+
+.msgHovered {
+  border-color: white;
+}
+
+.shortTermRecalled {
+  border-color: green;
+}
+
+.longTermRecalled {
+  border-color: blue;
 }

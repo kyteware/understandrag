@@ -8,10 +8,11 @@ export default function Chat({ conversation, addMessage }) {
     </div>
   }
 
+  const [hovered, setHovered] = useState(null);
+
   const messages = conversation.messages;
   const { stmLength, maxRetrievals } = conversation.config;
-  let msgs = messages.map(message => <Msg message={message} key={message.number}/>)
-
+  let msgs = messages.map(message => <Msg message={message} hovered={hovered} setHovered={setHovered} key={message.number}/>)
 
   return (
     <div className="remChat">
@@ -41,8 +42,32 @@ export default function Chat({ conversation, addMessage }) {
   );
 }
 
-function Msg({ message }) {
-  return <p className={message.label == "user" ? 'userMsg' : 'assistantMsg'}>{message.text}</p>
+function Msg({ message, hovered, setHovered }) {
+  function handleMouseEnter() {
+    setHovered(message);
+  }
+  function handleMouseLeave() {
+    setHovered(null);
+  }
+
+  const authorName = message.label == "user" ? 'userMsg' : 'assistantMsg';
+  let hoveredClass = "";
+  if (message == hovered) {
+    hoveredClass = "msgHovered";
+  } else if (hovered !== null && hovered.retrieved !== null && hovered.retrieved.includes(message)) {
+    hoveredClass = "longTermRecalled";
+  }
+  const className = authorName + " " + hoveredClass;
+
+  return (
+    <p 
+      className={className}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {message.text}
+    </p>
+  )
 }
 
 export class Message {
