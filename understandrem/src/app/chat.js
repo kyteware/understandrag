@@ -12,7 +12,7 @@ export default function Chat({ conversation, addMessage }) {
 
   const messages = conversation.messages;
   const { stmLength, maxRetrievals } = conversation.config;
-  let msgs = messages.map(message => <Msg message={message} hovered={hovered} setHovered={setHovered} key={message.number}/>)
+  let msgs = messages.map(message => <Msg message={message} hovered={hovered} setHovered={setHovered} stmLength={conversation.config.stmLength} key={message.number}/>)
 
   return (
     <div className="remChat">
@@ -42,7 +42,7 @@ export default function Chat({ conversation, addMessage }) {
   );
 }
 
-function Msg({ message, hovered, setHovered }) {
+function Msg({ message, hovered, setHovered, stmLength }) {
   function handleMouseEnter() {
     setHovered(message);
   }
@@ -56,6 +56,8 @@ function Msg({ message, hovered, setHovered }) {
     hoveredClass = "msgHovered";
   } else if (hovered !== null && hovered.retrieved !== null && hovered.retrieved.includes(message)) {
     hoveredClass = "longTermRecalled";
+  } else if (hovered !== null && hovered.number > message.number && (hovered.number-1) - stmLength*2 <= message.number) {
+    hoveredClass = "shortTermRecalled";
   }
   const className = authorName + " " + hoveredClass;
 
