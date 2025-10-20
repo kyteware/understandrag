@@ -2,7 +2,7 @@ import { useState } from "react";
 import { prompt, query } from "./ai";
 
 export default function Chat({ conversation, addMessage }) {
-  if (conversation == null) {
+  if (conversation == undefined) {
     return <div className="remChat">
       <h1>Create a new chat!</h1>
     </div>
