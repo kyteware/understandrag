@@ -1,5 +1,6 @@
 import { ConversationConfig, Conversation } from "./chat";
 import { useState } from "react";
+import Slider from "./slider";
 
 export default function Conversations({ currentConvId, setCurrentConvId, convList, setConvList }) {
   const [newConvConfig, setNewConvConfig] = useState(new ConversationConfig(5, 5));
@@ -23,13 +24,12 @@ export default function Conversations({ currentConvId, setCurrentConvId, convLis
   }
 
   return (
-    <div className="panel bottomPanel">
-      <p>Short term memory length: {newConvConfig.stmLength}</p>
-      <input type="range" min="1" max="20" value={newConvConfig.stmLength} onChange={e => setNewConvConfig({...newConvConfig, stmLength: e.target.value })}/>
-      <p>Max long term memory retrievals: {newConvConfig.maxRetrievals}</p>
-      <input type="range" min="1" max="20" value={newConvConfig.maxRetrievals} onChange={e => setNewConvConfig({...newConvConfig, maxRetrievals: e.target.value })}/>
+    <div className="conversations panel bottomPanel">
+      <Slider name="Short Term Mem" min="1" max="20" def="5" onChange={stm => setNewConvConfig({...newConvConfig, stmLength: stm})}/>
+      <Slider name="Long Term Retrievals" min="1" max="20" def="5" onChange={mx => setNewConvConfig({...newConvConfig, maxRetrievals: mx})}/>  
       <br/>
       <button type="button" onClick={onNewConv}>New Chat</button>
+      <div className="verticalDivider"/>
       <fieldset>
         <legend>Select a Conversation:</legend>
 
