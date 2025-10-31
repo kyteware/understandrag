@@ -14,17 +14,39 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #516d74;
-    --secondary: #999999;
+    --background: #323031;
+    --background-lighter: #494647;
+    --foreground: #D8E9D9;
+    --primary: #50723C;
+    --secondary: #B88B4A;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Nunito", sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+.panel {
+  background-color: var(--background-lighter);
+  margin: 5px;
+  border: 10px solid var(--background-lighter);
+  border-radius: 5px;
+}
+
+.title {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 600;
+  font-size: 125%;
+}
+
+.bottomPanel {
+  margin-bottom: 0px;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 0px;
 }
 
 .remChatMessages {
@@ -40,7 +62,6 @@ body {
   flex-grow: 1;
   flex-shrink: 0; 
   flex-basis: auto;
-  background-color: darkgrey;
   height: 100%;
 }
 
@@ -57,8 +78,8 @@ body {
 }
 
 .userMsg, .assistantMsg {
-  border-radius: 7px;
-  border-width: 2px;
+  border-radius: 12px;
+  border-width: 8px;
   margin: 2px;
   padding: 3px;
 }

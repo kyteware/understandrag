@@ -3,7 +3,7 @@ import { prompt, query } from "./ai";
 
 export default function Chat({ conversation, addMessage }) {
   if (conversation == undefined) {
-    return <div className="remChat">
+    return <div className="remChat panel bottomPanel">
       <h1>Create a new chat!</h1>
     </div>
   }
@@ -15,7 +15,7 @@ export default function Chat({ conversation, addMessage }) {
   let msgs = messages.map(message => <Msg message={message} hovered={hovered} setHovered={setHovered} stmLength={conversation.config.stmLength} key={message.number}/>)
 
   return (
-    <div className="remChat">
+    <div className="remChat panel">
       <div className="remChatMessages">
         {msgs}
       </div>

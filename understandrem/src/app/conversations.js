@@ -23,7 +23,7 @@ export default function Conversations({ currentConvId, setCurrentConvId, convLis
   }
 
   return (
-    <div>
+    <div className="panel bottomPanel">
       <p>Short term memory length: {newConvConfig.stmLength}</p>
       <input type="range" min="1" max="20" value={newConvConfig.stmLength} onChange={e => setNewConvConfig({...newConvConfig, stmLength: e.target.value })}/>
       <p>Max long term memory retrievals: {newConvConfig.maxRetrievals}</p>

@@ -3,8 +3,8 @@ import { setKey } from "./ai";
 
 export default function URHeader() {
   return (
-    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-      <h1>UnderstandREM</h1>
+    <div  className="panel" style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+      <h1 className="title">UnderstandREM</h1>
       <ApiKeyInput/>
     </div>
   )
