@@ -19,6 +19,7 @@
     --foreground: #D8E9D9;
     --primary: #50723C;
     --secondary: #B88B4A;
+    --secondary-unfocused: #8f6b38;
   }
 }
 
@@ -28,6 +29,24 @@ body {
   font-family: "Nunito", sans-serif;
   width: 100vw;
   height: 100vh;
+}
+
+.pageMaster {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  /* overflow-x: hidden;
+  overflow-y: hidden; */
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 300px 1fr;
+  border: 2x dashed purple;
+}
+
+.header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .panel {
@@ -49,20 +68,29 @@ body {
   border-bottom: 0px;
 }
 
+.remChat {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  /* height: 100%; */
+}
+
+.remChatMessagesContainer {
+  flex-grow: 1;
+  height: 69px; /* god knows why this fixed everything */
+  overflow-y: scroll;
+}
+
 .remChatMessages {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  flex-grow: 1;
 }
 
-.remChat {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 0; 
-  flex-basis: auto;
-  height: 100%;
+.msgInput {
+
 }
 
 .userMsg {
@@ -82,6 +110,7 @@ body {
   border-width: 8px;
   margin: 2px;
   padding: 3px;
+  word-break: break-all;
 }
 
 .msgHovered {
@@ -105,6 +134,8 @@ body {
 }
 
 .conversations {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
 }
@@ -142,3 +173,18 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -6px;
 }
+
+input[type=text] {
+  outline: none !important;
+  appearance: none;
+  border: 2px solid var(--secondary-unfocused);
+  border-radius: 5px;
+  padding: 2px 6px;
+  margin: 2px 5px;
+}
+
+input[type=text]:focus {
+  border: 4px solid var(--secondary);
+  margin: 0px 5px;
+}
+

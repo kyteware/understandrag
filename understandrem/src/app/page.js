@@ -22,16 +22,14 @@ export default function Home() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div className="pageMaster">
       <URHeader/>
       {/* horizontal blocks */}
-      <div style={{display: "flex", justifyContent: "space-between", height: "100%"}}> 
-        <Conversations currentConvId={currentConvId} setCurrentConvId={setCurrentConvId} convList={convList} setConvList={setConvList}/>
-        <Chat 
-          conversation={getCurrentConv()} 
-          addMessage={addMessageToCurrentConv}
-        />
-      </div>
+      <Conversations currentConvId={currentConvId} setCurrentConvId={setCurrentConvId} convList={convList} setConvList={setConvList}/>
+      <Chat 
+        conversation={getCurrentConv()} 
+        addMessage={addMessageToCurrentConv}
+      />
     </div>
   );
 }
