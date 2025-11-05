@@ -13,6 +13,23 @@ export default function Chat({ conversation, addMessage }) {
   const messages = conversation.messages;
   const { stmLength, maxRetrievals } = conversation.config;
   let msgs = messages.map(message => <Msg message={message} hovered={hovered} setHovered={setHovered} stmLength={conversation.config.stmLength} key={message.number}/>)
+  const handleMessage = async (text) => {
+    const user_prompt = new Message(messages.length, "user", text);
+    addMessage(user_prompt);
+
+    let retrieved = null;
+    if (messages.length > stmLength * 2) {
+      retrieved = await query(text, maxRetrievals, messages.slice(0, -(stmLength * 2)));
+    }
+
+    try {
+      const resp = await prompt([...messages, user_prompt], retrieved);
+      const assistant_reponse = new Message(messages.length + 1, "assistant", resp, retrieved);
+      addMessage(assistant_reponse)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className="remChat panel bottomPanel">
@@ -21,25 +38,7 @@ export default function Chat({ conversation, addMessage }) {
           {msgs}
         </div>
       </div>
-      <MsgTextBox handleMessage={
-        async (text) => {
-          const user_prompt = new Message(messages.length, "user", text);
-          addMessage(user_prompt);
-
-          let retrieved = null;
-          if (messages.length > stmLength * 2) {
-            retrieved = await query(text, maxRetrievals, messages.slice(0, -(stmLength * 2)));
-          }
-
-          try {
-            const resp = await prompt([...messages, user_prompt], retrieved);
-            const assistant_reponse = new Message(messages.length + 1, "assistant", resp, retrieved);
-            addMessage(assistant_reponse)
-          } catch (err) {
-            console.log(err)
-          }
-        }
-      }/>
+      <MsgTextBox handleMessage={handleMessage}/>
     </div>
   );
 }
