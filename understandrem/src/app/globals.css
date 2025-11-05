@@ -90,7 +90,26 @@ body {
 }
 
 .msgInput {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding: 5px;
+  height: 50px
+}
 
+.msgTextInput {
+  flex-grow: 1;
+}
+
+button {
+  border: 2px solid var(--secondary-unfocused);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+button:hover {
+  border-color: var(--secondary)
 }
 
 .userMsg {
@@ -140,6 +159,11 @@ body {
   flex-direction: column;
 }
 
+.apiKeySettings {
+  display: flex;
+  gap: 5px;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -180,11 +204,10 @@ input[type=text] {
   border: 2px solid var(--secondary-unfocused);
   border-radius: 5px;
   padding: 2px 6px;
-  margin: 2px 5px;
+  /* margin: 2px 5px; */
 }
 
 input[type=text]:focus {
-  border: 4px solid var(--secondary);
-  margin: 0px 5px;
+  border-color: var(--secondary);
 }
 

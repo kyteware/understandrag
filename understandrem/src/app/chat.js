@@ -122,8 +122,8 @@ function MsgTextBox({ handleMessage }) {
   //   <input type="submit" value="Submit"/>
   // </form>;
 
-  return <div class="msgInput">
-    <input type="text" id="msgInput" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
+  return <div className="msgInput">
+    <input class="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
     <button type="button" onClick={onSubmit}>Prompt</button>
   </div>
 }
