@@ -89,6 +89,10 @@ body {
   justify-content: flex-end;
 }
 
+.convConfigOverview {
+  align-self: center;
+}
+
 .msgInput {
   width: 100%;
   display: flex;

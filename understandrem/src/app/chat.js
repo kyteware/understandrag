@@ -33,6 +33,7 @@ export default function Chat({ conversation, addMessage }) {
 
   return (
     <div className="remChat panel bottomPanel">
+      <ConversationConfigOverview conversationConfig={conversation.config}/>
       <div className="remChatMessagesContainer">
         <div className="remChatMessages">
           {msgs}
@@ -125,5 +126,12 @@ function MsgTextBox({ handleMessage }) {
   return <div className="msgInput">
     <input class="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
     <button type="button" onClick={onSubmit}>Prompt</button>
+  </div>
+}
+
+function ConversationConfigOverview({ conversationConfig }) {
+  return <div className="convConfigOverview">
+    <h1>Short Term Memory: {conversationConfig.stmLength}</h1>
+    <h1>Long Term Retrievals: {conversationConfig.maxRetrievals}</h1>
   </div>
 }

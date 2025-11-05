@@ -49,7 +49,6 @@ export default function Conversations({ currentConvId, setCurrentConvId, convLis
           ))
         }
       </fieldset>
-      <p>{convList.length}</p>
     </div>
   )
 }
