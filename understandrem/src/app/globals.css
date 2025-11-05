@@ -18,6 +18,7 @@
     --background-lighter: #494647;
     --foreground: #D8E9D9;
     --primary: #50723C;
+    --primary-hovered: #71a055;
     --secondary: #B88B4A;
     --secondary-unfocused: #8f6b38;
   }
@@ -162,6 +163,44 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+
+.conversationList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conversationList input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.conversationList label {
+  display: block;
+  width: 98%;
+  align-self: center;
+  padding: 3px;
+  margin: 3px;
+  border: 2px solid var(--background);
+  border-radius: 10px;
+  background-color: var(--secondary-unfocused);
+}
+
+.conversationList label:hover {
+  background-color: var(--secondary);
+}
+
+.conversationList input[type="radio"]:checked + label {
+  background-color: var(--primary);
+}
+
+.conversationList input[type="radio"]:checked + label:hover {
+  background-color: var(--primary-hovered);
+}
+
+.conversationList 
 
 .apiKeySettings {
   display: flex;

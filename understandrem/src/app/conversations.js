@@ -30,25 +30,26 @@ export default function Conversations({ currentConvId, setCurrentConvId, convLis
       <br/>
       <button type="button" onClick={onNewConv}>New Chat</button>
       <div className="verticalDivider"/>
-      <fieldset>
-        <legend>Select a Conversation:</legend>
-
-        {
-          convList.map(value => (
-            <div key={value.id}>
-              <input 
-                type="radio" 
-                id={"conv" + value.id} 
-                name="conversations" 
-                value={value.id}
-                checked={currentConvId == value.id}
-                onChange={event => onChooseConv(event.target.value)}
-              />
-              <label htmlFor={"conv" + value.id}>Conversation {value.id}</label>
-            </div>
-          ))
-        }
-      </fieldset>
+      <div className="conversationList">
+        <fieldset style={{width: "100%"}}>
+          <legend>Select a Conversation:</legend>
+          {
+            convList.map(value => (
+              <div key={value.id}>
+                <input 
+                  type="radio" 
+                  id={"conv" + value.id} 
+                  name="conversations" 
+                  value={value.id}
+                  checked={currentConvId == value.id}
+                  onChange={event => onChooseConv(event.target.value)}
+                />
+                <label htmlFor={"conv" + value.id}>Conversation {value.id}</label>
+              </div>
+            ))
+          }
+        </fieldset>
+      </div>
     </div>
   )
 }
