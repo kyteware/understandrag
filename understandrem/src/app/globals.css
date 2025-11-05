@@ -200,8 +200,6 @@ button:hover {
   background-color: var(--primary-hovered);
 }
 
-.conversationList 
-
 .apiKeySettings {
   display: flex;
   gap: 5px;
