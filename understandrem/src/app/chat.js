@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { prompt, query } from "./ai";
 
 export default function Chat({ conversation, addMessage }) {
+  const [hovered, setHovered] = useState(null);
+  const containerRef = useRef(null);
+  // scrolling to bottom on conversation update
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  })
+
   if (conversation == undefined) {
     return <div className="remChat panel bottomPanel">
       <h1>Create a new chat!</h1>
     </div>
   }
-
-  const [hovered, setHovered] = useState(null);
 
   const messages = conversation.messages;
   const { stmLength, maxRetrievals } = conversation.config;
@@ -23,7 +30,7 @@ export default function Chat({ conversation, addMessage }) {
     }
 
     try {
-      const resp = await prompt([...messages, user_prompt], retrieved);
+      const resp = await prompt([...messages, user_prompt], retrieved, conversation.config);
       const assistant_reponse = new Message(messages.length + 1, "assistant", resp, retrieved);
       addMessage(assistant_reponse)
     } catch (err) {
@@ -34,7 +41,7 @@ export default function Chat({ conversation, addMessage }) {
   return (
     <div className="remChat panel bottomPanel">
       <ConversationConfigOverview conversationConfig={conversation.config}/>
-      <div className="remChatMessagesContainer">
+      <div className="remChatMessagesContainer" ref={containerRef}>
         <div className="remChatMessages">
           {msgs}
         </div>
@@ -124,7 +131,7 @@ function MsgTextBox({ handleMessage }) {
   // </form>;
 
   return <div className="msgInput">
-    <input class="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
+    <input className="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
     <button type="button" onClick={onSubmit}>Prompt</button>
   </div>
 }
