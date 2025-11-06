@@ -21,13 +21,12 @@ export function setKey(key) {
     haveKey = true;
 }
 
-export async function prompt(messages, retrieved = null) {
-    const labelled_messages = messages.map(message => {return {role: message.label, content: message.text}});
+export async function prompt(messages, retrieved = null, config) {
+    const labelled_messages = messages.slice(-config.stmLength * 2).map(message => {return {role: message.label, content: message.text}});
 
     const messages_with_extras = [{role: "system", content: SYSTEM_PROMPT}, ...labelled_messages];
     if (!(retrieved === null)) {
       const retrieved_text = gen_ltm_prompt(retrieved);
-      console.log(retrieved_text);
       messages_with_extras[0].content = SYSTEM_PROMPT + "\n\n-\n\n" + retrieved_text;
     }
 
