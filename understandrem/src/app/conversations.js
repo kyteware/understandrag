@@ -28,7 +28,7 @@ export default function Conversations({ currentConvId, setCurrentConvId, convLis
       <Slider name="Short Term Mem" min="1" max="20" def="5" onChange={stm => setNewConvConfig({...newConvConfig, stmLength: stm})}/>
       <Slider name="Long Term Retrievals" min="1" max="20" def="5" onChange={mx => setNewConvConfig({...newConvConfig, maxRetrievals: mx})}/>  
       <br/>
-      <button type="button" onClick={onNewConv}>New Chat</button>
+      <button type="button" style={{marginTop: "5px"}} onClick={onNewConv}>New Chat</button>
       <div className="verticalDivider"/>
       <div className="conversationList">
         <fieldset style={{width: "100%"}}>
