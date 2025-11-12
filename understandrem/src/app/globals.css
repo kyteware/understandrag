@@ -205,6 +205,24 @@ button:hover {
   gap: 5px;
 }
 
+.tooltip {
+  position: absolute;
+  padding: 4px;
+  background: var(--background);
+  border: 1px solid black;
+  border-radius: 3px;
+  white-space: 'nowrap';
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100%);
+  width: 100%
+}
+
+a {
+  color: var(--secondary);
+}
+
 input[type=range] {
   -webkit-appearance: none;
   -moz-appearance: none;

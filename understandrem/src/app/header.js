@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { setKey } from "./ai";
+import { TooltipWrapper } from "./tooltip";
 
 export default function URHeader() {
   return (
@@ -23,7 +24,14 @@ function ApiKeyInput() {
   }
 
   return <div className="apiKeySettings">
-    <input className="keyInput" type="text" id="msgInput" name="Enter API Key" value={msgSoFar} onInput={onInput}/>
+    <TooltipWrapper tooltipContent="">
+      <p>
+        To get a free API key, go to 
+        <br/>
+        <a href="https://aistudio.google.com/api-keys">Google's website</a>
+      </p>
+      <input className="keyInput" type="text" id="msgInput" name="Enter API Key" value={msgSoFar} onInput={onInput}/>
+    </TooltipWrapper>
     <button type="button" onClick={onSubmit}>Load</button>
   </div>
 }
