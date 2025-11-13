@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-export default function Tooltip({ content, setIsHovering }) {
+export default function Tooltip({ content, setIsHovering, above }) {
+  const style = above ? {bottom: "calc(100%)"} : {top: "calc(100%)"};
   return <div 
     className="tooltip"
+    style={style}
     onMouseEnter={() => setIsHovering(true)}
     onMouseLeave={() => setIsHovering(false)}
   >
@@ -10,7 +12,7 @@ export default function Tooltip({ content, setIsHovering }) {
   </div>
 }
 
-export function TooltipWrapper({ children }) {
+export function TooltipWrapper({ children, above }) {
   const [isHovering, setIsHovering] = useState(false);
   const [isHoveringTooltip, setIsHoveringTooltip] = useState(false);
 
@@ -21,7 +23,7 @@ export function TooltipWrapper({ children }) {
       onMouseLeave={() => setIsHovering(false)}
     >
       {children.slice(1)}
-      {(isHovering || isHoveringTooltip) && <Tooltip content={children[0]} setIsHovering={setIsHoveringTooltip}/>}
+      {(isHovering || isHoveringTooltip) && <Tooltip content={children[0]} setIsHovering={setIsHoveringTooltip} above={above}/>}
     </div>
   )
 }

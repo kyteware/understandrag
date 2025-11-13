@@ -24,7 +24,7 @@ function ApiKeyInput() {
   }
 
   return <div className="apiKeySettings">
-    <TooltipWrapper tooltipContent="">
+    <TooltipWrapper tooltipContent="" above={false}>
       <p>
         To get a free API key, go to 
         <br/>
