@@ -114,7 +114,12 @@ button {
 }
 
 button:hover {
-  border-color: var(--secondary)
+  border-color: var(--secondary);
+}
+
+button:disabled {
+  border-color: var(--background);
+  color: var(--background);
 }
 
 .userMsg {
