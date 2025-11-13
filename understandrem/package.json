@@ -12,6 +12,7 @@
     "@langchain/community": "^0.3.53",
     "@langchain/core": "^0.3.72",
     "@langchain/google-genai": "^0.2.16",
+    "@preact/signals-react": "^3.5.0",
     "langchain": "^0.3.31",
     "next": "15.5.0",
     "react": "19.1.0",

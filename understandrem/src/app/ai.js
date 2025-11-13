@@ -1,3 +1,4 @@
+import { signal } from "@preact/signals-core";
 import { gen_ltm_prompt, SYSTEM_PROMPT } from "./prompts";
 
 const { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } = require("@langchain/google-genai");
@@ -8,17 +9,25 @@ let llm = new ChatGoogleGenerativeAI({
     apiKey: "."
 })
 
-let haveKey = false;
-export function keyProvided() {
-    return haveKey;
-}
-export function setKey(key) {
+export const haveKey = signal(false);
+export async function setKey(key) {
     llm = new ChatGoogleGenerativeAI({
         model: "gemini-2.0-flash",
         temperature: 0,
         apiKey: key
     })
-    haveKey = true;
+    haveKey.value = false;
+    llm.invoke([{role: "user", content: "respond with the word hi (say nothing else)"}])
+      .then(result => {
+        if (result.content.trim() == "hi") {
+          haveKey.value = true;
+        } else {
+          console.log("a test call to google worked but the llm didnt say hi back??");
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
 }
 
 export async function prompt(messages, retrieved = null, config) {
