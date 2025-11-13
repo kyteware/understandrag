@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { haveKey, prompt, query } from "./ai";
 import { useSignals } from "@preact/signals-react/runtime";
+import { TooltipWrapper } from "./tooltip";
 
 export default function Chat({ conversation, addMessage }) {
   const [hovered, setHovered] = useState(null);
@@ -115,7 +116,6 @@ function MsgTextBox({ handleMessage }) {
   const [msgSoFar, setMsgSoFar] = useState("");
   useSignals();
   const disabled = !haveKey.value;
-  // console.log("rerendering");
 
   function onInput(event) {
     setMsgSoFar(event.target.value);
@@ -129,16 +129,19 @@ function MsgTextBox({ handleMessage }) {
     handleMessage(msgSoFar);
   }
 
-  // return <form action={handleMessage} onSubmit={onSubmit}>
-  //   <input type="ltext" id="messageText" name="Message text"/>
-  //   <input type="submit" value="Submit"/>
-  // </form>;
-
-  // console.log(haveKey.value);
-  return <div className="msgInput">
+  const inner = <div className="msgInput">
     <input className="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
     <button type="button" onClick={onSubmit} disabled={disabled}>Prompt</button>
-  </div>
+  </div>;
+
+  if (disabled) {
+    return <TooltipWrapper above={true}>
+      <p>Requires valid API key</p>
+      {inner}
+    </TooltipWrapper>
+  }
+  
+  return inner;
 }
 
 function ConversationConfigOverview({ conversationConfig }) {
