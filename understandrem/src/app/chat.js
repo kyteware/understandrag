@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { prompt, query } from "./ai";
+import { haveKey, prompt, query } from "./ai";
+import { useSignals } from "@preact/signals-react/runtime";
 
 export default function Chat({ conversation, addMessage }) {
   const [hovered, setHovered] = useState(null);
@@ -112,6 +113,9 @@ export class ConversationConfig {
 
 function MsgTextBox({ handleMessage }) {
   const [msgSoFar, setMsgSoFar] = useState("");
+  useSignals();
+  const disabled = !haveKey.value;
+  // console.log("rerendering");
 
   function onInput(event) {
     setMsgSoFar(event.target.value);
@@ -130,9 +134,10 @@ function MsgTextBox({ handleMessage }) {
   //   <input type="submit" value="Submit"/>
   // </form>;
 
+  // console.log(haveKey.value);
   return <div className="msgInput">
     <input className="msgTextInput" type="text" name="Enter prompt here" value={msgSoFar} onInput={onInput}/>
-    <button type="button" onClick={onSubmit}>Prompt</button>
+    <button type="button" onClick={onSubmit} disabled={disabled}>Prompt</button>
   </div>
 }
 

@@ -19,7 +19,8 @@ export async function setKey(key) {
     haveKey.value = false;
     llm.invoke([{role: "user", content: "respond with the word hi (say nothing else)"}])
       .then(result => {
-        if (result.content.trim() == "hi") {
+        if (result.content.toLowerCase().trim() == "hi") {
+          console.log("key validated");
           haveKey.value = true;
         } else {
           console.log("a test call to google worked but the llm didnt say hi back??");
