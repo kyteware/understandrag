@@ -147,11 +147,11 @@ button:disabled {
 }
 
 .shortTermRecalled {
-  border-color: green;
+  border-color: #151E3D;
 }
 
 .longTermRecalled {
-  border-color: blue;
+  border-color: #B65FCF;
 }
 
 .verticalDivider {
