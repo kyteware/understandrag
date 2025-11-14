@@ -5,7 +5,7 @@ import { TooltipWrapper } from "./tooltip";
 export default function URHeader() {
   return (
     <div className="header panel">
-      <h1 className="title">UnderstandREM</h1>
+      <h1 className="title">UnderstandRAG</h1>
       <ApiKeyInput/>
     </div>
   )

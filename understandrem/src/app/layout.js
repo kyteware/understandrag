@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Understandrem",
-  description: "Tool for understand how llm rem can work.",
+  title: "UnderstandRAG",
+  description: "Tool for understand how llm retrieval augmented generation can work.",
 };
 
 export default function RootLayout({ children }) {
