@@ -28,7 +28,7 @@ function ApiKeyInput() {
       <p>
         To get a free API key, go to 
         <br/>
-        <a href="https://aistudio.google.com/api-keys">Google's website</a>
+        <a href="https://aistudio.google.com/api-keys">{"Google's website"}</a>
       </p>
       <input className="keyInput" type="text" id="msgInput" placeholder="Enter API Key" value={msgSoFar} onInput={onInput}/>
     </TooltipWrapper>
