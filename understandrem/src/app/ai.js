@@ -9,6 +9,18 @@ let llm = new ChatGoogleGenerativeAI({
     apiKey: "."
 })
 
+let q_embdr = new GoogleGenerativeAIEmbeddings({
+    model: "gemini-embedding-001",
+    apiKey: ".",
+    taskType: "RETRIEVAL_QUERY"
+});
+
+let d_embdr = new GoogleGenerativeAIEmbeddings({
+    model: "gemini-embedding-001",
+    apiKey: ".",
+    taskType: "RETRIEVAL_DOCUMENT"
+});
+
 export const haveKey = signal(false);
 export async function setKey(key) {
     llm = new ChatGoogleGenerativeAI({
@@ -16,6 +28,17 @@ export async function setKey(key) {
         temperature: 0,
         apiKey: key
     })
+    q_embdr = new GoogleGenerativeAIEmbeddings({
+      model: "gemini-embedding-001",
+      apiKey: key,
+      taskType: "RETRIEVAL_QUERY"
+    });
+    d_embdr = new GoogleGenerativeAIEmbeddings({
+        model: "gemini-embedding-001",
+        apiKey: key,
+        taskType: "RETRIEVAL_DOCUMENT"
+    });
+
     haveKey.value = false;
     llm.invoke([{role: "user", content: "respond with the word hi (say nothing else)"}])
       .then(result => {
@@ -43,17 +66,6 @@ export async function prompt(messages, retrieved = null, config) {
     const output = await llm.invoke(messages_with_extras)
     return output.content;
 }
-
-const q_embdr = new GoogleGenerativeAIEmbeddings({
-    model: "gemini-embedding-001",
-    apiKey: "AIzaSyBMO7HoWRPewxpkyGVoSCDAGoJlrTBriv0",
-    taskType: "RETRIEVAL_QUERY"
-});
-const d_embdr = new GoogleGenerativeAIEmbeddings({
-    model: "gemini-embedding-001",
-    apiKey: "AIzaSyBMO7HoWRPewxpkyGVoSCDAGoJlrTBriv0",
-    taskType: "RETRIEVAL_DOCUMENT"
-});
 
 // from: https://github.com/PaulKinlan/idb-vector/blob/main/index.js
 function cosineSimilarity(a, b) {
